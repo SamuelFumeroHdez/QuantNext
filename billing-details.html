@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Datos de facturación — QuantNext</title>
+  <style>
+    :root{
+      --bg:#0d1117;
+      --card:#111720;
+      --muted:#6b7a91;
+      --text:#e8edf5;
+      --soft:#c5cdd8;
+      --border:rgba(255,255,255,0.07);
+      --accent:#00c98a;
+      --accentSoft:rgba(0,201,138,0.12);
+      --danger:#ff5c7a;
+      --warn:#ffcc66;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; padding:0;
+      background:var(--bg);
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      color:var(--text);
+    }
+    .wrap{
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:16px;
+      overflow:hidden;
+    }
+    .header{
+      background: linear-gradient(135deg, #0d1117 0%, #0a1628 100%);
+      padding: 34px 28px;
+      border-bottom: 1px solid rgba(0,201,138,0.15);
+      display:flex; gap:18px;
+      align-items:flex-start;
+      justify-content:space-between;
+    }
+    .brand{
+      font-size:13px;
+      font-weight:800;
+      letter-spacing:0.12em;
+      text-transform:uppercase;
+      color:var(--accent);
+      margin:0 0 14px 0;
+    }
+    .pill{
+      display:inline-block;
+      background:var(--accentSoft);
+      border:1px solid rgba(0,201,138,0.25);
+      color:var(--accent);
+      border-radius:999px;
+      padding:6px 12px;
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:0.05em;
+      margin-bottom:14px;
+    }
+    h1{
+      margin:0 0 8px 0;
+      font-size:26px;
+      line-height:1.2;
+      font-weight:900;
+    }
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.6;
+      max-width: 640px;
+    }
+    .icon{
+      width:54px; height:54px;
+      background:var(--accentSoft);
+      border:1px solid rgba(0,201,138,0.25);
+      border-radius:12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:22px;
+      flex:0 0 auto;
+    }
+    .content{ padding: 28px; }
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 800px){
+      .grid{ grid-template-columns: 1fr; }
+      .header{ flex-direction:column; }
+      .icon{ align-self:flex-start; }
+    }
+    label{
+      display:block;
+      margin: 0 0 6px 0;
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 700;
+      letter-spacing:0.04em;
+      text-transform:uppercase;
+    }
+    input, select, textarea{
+      width:100%;
+      background:#0d1117;
+      color:var(--text);
+      border:1px solid rgba(255,255,255,0.10);
+      border-radius:12px;
+      padding: 12px 12px;
+      outline:none;
+      font-size:14px;
+    }
+    textarea{ min-height: 96px; resize: vertical; }
+    input:focus, select:focus, textarea:focus{
+      border-color: rgba(0,201,138,0.45);
+      box-shadow: 0 0 0 4px rgba(0,201,138,0.12);
+    }
+    .row{ margin-bottom: 14px; }
+    .hint{
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+    .bar{
+      margin-top: 18px;
+      display:flex;
+      gap: 12px;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: 14px 18px;
+      border-radius: 12px;
+      border: 1px solid rgba(0,201,138,0.3);
+      background: var(--accent);
+      color: #fff;
+      font-weight: 900;
+      text-decoration:none;
+      cursor:pointer;
+      box-shadow: 0 0 30px rgba(0,201,138,0.25);
+      min-width: 220px;
+    }
+    .btn:disabled{
+      opacity:0.45;
+      cursor:not-allowed;
+      box-shadow:none;
+    }
+    .status{
+      padding: 12px 14px;
+      border-radius: 12px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:#0d1117;
+      color: var(--soft);
+      font-size: 13px;
+      line-height: 1.5;
+      flex: 1 1 320px;
+    }
+    .status.ok{ border-color: rgba(0,201,138,0.35); }
+    .status.err{ border-color: rgba(255,92,122,0.35); color:#ffd6de; }
+    .status.warn{ border-color: rgba(255,204,102,0.35); color:#ffe7b8; }
+    .footer{
+      padding: 20px 28px;
+      border-top:1px solid rgba(255,255,255,0.06);
+      background:#0a0d13;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .foot-left{
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+    .wa{
+      color: var(--accent);
+      text-decoration:none;
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .small{
+      font-size:12px;
+      color: var(--muted);
+    }
+    .mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="header">
+        <div>
+          <p class="brand">QuantNext</p>
+          <div class="pill">● DATOS DE FACTURACIÓN</div>
+          <h1>Completa tus datos fiscales</h1>
+          <p class="sub">
+            Este formulario está protegido con un enlace firmado. Si el enlace caduca o es inválido, no podrás enviarlo (y es exactamente lo que queremos).
+          </p>
+        </div>
+        <div class="icon">🧾</div>
+      </div>
+
+      <div class="content">
+        <div id="status" class="status warn">Validando enlace…</div>
+
+        <form id="form" style="margin-top:18px; display:none;">
+          <div class="grid">
+            <div class="row">
+              <label>Tipo</label>
+              <select name="tipo" required>
+                <option value="empresa">Empresa</option>
+                <option value="autonomo">Autónomo</option>
+                <option value="particular">Particular</option>
+              </select>
+            </div>
+
+            <div class="row">
+              <label>País</label>
+              <input name="pais" placeholder="España" value="España" required />
+            </div>
+
+            <div class="row">
+              <label>Razón social / Nombre completo</label>
+              <input name="razon_social" placeholder="Ej: ACME S.L." required />
+            </div>
+
+            <div class="row">
+              <label>NIF / CIF</label>
+              <input name="nif" placeholder="Ej: B12345678" required />
+              <div class="hint">Asegúrate de que coincide exactamente con tus datos fiscales.</div>
+            </div>
+
+            <div class="row">
+              <label>Dirección fiscal</label>
+              <input name="direccion" placeholder="Calle, número, piso…" required />
+            </div>
+
+            <div class="row">
+              <label>Ciudad</label>
+              <input name="ciudad" placeholder="Ej: Las Palmas de Gran Canaria" required />
+            </div>
+
+            <div class="row">
+              <label>Provincia</label>
+              <input name="provincia" placeholder="Ej: Las Palmas" required />
+            </div>
+
+            <div class="row">
+              <label>Código postal</label>
+              <input name="cp" placeholder="35001" required />
+            </div>
+
+            <div class="row">
+              <label>Email para la factura</label>
+              <input type="email" name="email_factura" placeholder="facturacion@tuempresa.com" required />
+            </div>
+
+            <div class="row">
+              <label>Teléfono (opcional)</label>
+              <input name="telefono" placeholder="+34 600 000 000" />
+            </div>
+          </div>
+
+          <div class="row" style="margin-top:10px;">
+            <label>Observaciones (opcional)</label>
+            <textarea name="observaciones" placeholder="Ej: Nº pedido interno, referencias, etc."></textarea>
+          </div>
+
+          <div class="bar">
+            <button id="submitBtn" class="btn" type="submit">Enviar datos →</button>
+            <div class="status ok" id="metaBox" style="display:none;">
+              Enlace válido. ID operación: <span class="mono" id="dealIdBox"></span>
+            </div>
+          </div>
+
+          <p class="small" style="margin:14px 0 0;">
+            Si el botón no funciona, copia y pega el enlace del email en el navegador. (Sí, Outlook… te estamos mirando.)
+          </p>
+        </form>
+      </div>
+
+      <div class="footer">
+        <div class="foot-left">
+          <strong style="color:var(--text);">Quant<span style="color:var(--accent);">Next</span></strong><br/>
+          Automatización de procesos con IA · Canarias, España
+        </div>
+        <div>
+          <a class="wa" href="https://wa.me/34647025041">¿Dudas? WhatsApp →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  // 🔧 Pon aquí tus URLs de webhooks n8n (PROD)
+  const VALIDATE_URL = "https://primer-proyecto-n8n.uwzfiy.easypanel.host/webhook-test/validate-billing-token";
+  const SUBMIT_URL   = "https://primer-proyecto-n8n.uwzfiy.easypanel.host/webhook-test/submit-billing-data";
+
+  const statusEl = document.getElementById('status');
+  const formEl = document.getElementById('form');
+  const submitBtn = document.getElementById('submitBtn');
+  const metaBox = document.getElementById('metaBox');
+  const dealIdBox = document.getElementById('dealIdBox');
+
+  const token = new URLSearchParams(location.search).get('token');
+
+  function setStatus(type, html){
+    statusEl.className = 'status ' + type;
+    statusEl.innerHTML = html;
+  }
+
+  async function validateToken() {
+    if (!token) {
+      setStatus('err', 'Falta el parámetro <span class="mono">token</span> en la URL.');
+      return null;
+    }
+
+    try {
+      const res = await fetch(VALIDATE_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token }),
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok || !data.ok) {
+        setStatus('err', data?.message || 'Enlace inválido o caducado.');
+        return null;
+      }
+
+      setStatus('ok', 'Enlace validado correctamente. Ya puedes completar el formulario.');
+      formEl.style.display = 'block';
+      metaBox.style.display = 'block';
+      dealIdBox.textContent = data.dealId;
+
+      return data.dealId;
+    } catch (e) {
+      setStatus('err', 'No se pudo validar el enlace. Revisa tu conexión o inténtalo más tarde.');
+      return null;
+    }
+  }
+
+  let dealId = null;
+
+  (async () => {
+    dealId = await validateToken();
+    if (!dealId) {
+      submitBtn.disabled = true;
+      return;
+    }
+  })();
+
+  formEl.addEventListener('submit', async (ev) => {
+    ev.preventDefault();
+    if (!dealId || !token) return;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Enviando…';
+
+    const formData = new FormData(formEl);
+    const billing = Object.fromEntries(formData.entries());
+
+    try {
+      const res = await fetch(SUBMIT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token, dealId, billing }),
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok || !data.ok) {
+        setStatus('err', data?.message || 'No se pudo enviar. Revisa los datos e inténtalo.');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Enviar datos →';
+        return;
+      }
+
+      setStatus('ok', 'Datos recibidos ✅. En breve te confirmamos la emisión de la factura por email.');
+      formEl.reset();
+      submitBtn.textContent = 'Enviado';
+    } catch (e) {
+      setStatus('err', 'Error de red al enviar. Inténtalo de nuevo.');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Enviar datos →';
+    }
+  });
+</script>
+</body>
+</html>

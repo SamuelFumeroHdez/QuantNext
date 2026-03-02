@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pago realizado — QuantNext</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #080b10; --bg2: #0d1117; --card: #111720;
+    --border: rgba(255,255,255,0.07); --accent: #00c98a; --accent2: #0077ff;
+    --text: #e8edf5; --muted: #6b7a91;
+    --nav-bg: rgba(8,11,16,0.92);
+    --font-head: 'Syne', sans-serif; --font-body: 'DM Sans', sans-serif;
+  }
+  body.light {
+    --bg: #f4f6fa; --bg2: #eaecf3; --card: #ffffff;
+    --border: rgba(0,0,0,0.09); --text: #0d1117; --muted: #5a6a82;
+    --nav-bg: rgba(244,246,250,0.92);
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 17px; line-height: 1.65; overflow-x: hidden; transition: background 0.35s, color 0.35s; min-height: 100vh; display: flex; flex-direction: column; }
+
+  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E"); opacity: 0.02; pointer-events: none; z-index: 9999; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 18px 6vw; background: var(--nav-bg); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); transition: background 0.35s; }
+  .logo { font-family: var(--font-head); font-weight: 800; font-size: 1.3rem; color: var(--text); text-decoration: none; }
+  .logo span { color: var(--accent); }
+  .theme-toggle { width: 40px; height: 40px; border-radius: 8px; border: 1px solid var(--border); background: transparent; color: var(--muted); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.05rem; transition: border-color 0.2s, background 0.2s; }
+  .theme-toggle:hover { border-color: var(--accent); color: var(--accent); background: rgba(0,201,138,0.07); }
+
+  /* MAIN */
+  main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 120px 6vw 80px; position: relative; overflow: hidden; }
+
+  /* Glows */
+  .glow-1 { position: fixed; width: 600px; height: 600px; background: radial-gradient(ellipse, rgba(0,201,138,0.10) 0%, transparent 70%); top: -100px; right: -100px; pointer-events: none; }
+  .glow-2 { position: fixed; width: 400px; height: 400px; background: radial-gradient(ellipse, rgba(0,119,255,0.08) 0%, transparent 70%); bottom: -50px; left: -80px; pointer-events: none; }
+
+  .content { max-width: 640px; width: 100%; text-align: center; position: relative; z-index: 1; }
+
+  /* Success icon */
+  .success-ring { position: relative; width: 100px; height: 100px; margin: 0 auto 36px; }
+  .success-ring svg { width: 100px; height: 100px; }
+  .ring-bg { fill: none; stroke: rgba(0,201,138,0.15); stroke-width: 4; }
+  .ring-fill { fill: none; stroke: #00c98a; stroke-width: 4; stroke-linecap: round; stroke-dasharray: 283; stroke-dashoffset: 283; animation: ring-draw 0.8s ease forwards 0.2s; }
+  .check { stroke: #00c98a; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; fill: none; stroke-dasharray: 50; stroke-dashoffset: 50; animation: check-draw 0.4s ease forwards 0.9s; }
+  .icon-bg { position: absolute; inset: 0; border-radius: 50%; background: rgba(0,201,138,0.08); }
+  @keyframes ring-draw { to { stroke-dashoffset: 0; } }
+  @keyframes check-draw { to { stroke-dashoffset: 0; } }
+
+  /* Badge */
+  .badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(0,201,138,0.08); border: 1px solid rgba(0,201,138,0.2); color: var(--accent); padding: 6px 16px; border-radius: 100px; font-size: 0.82rem; font-weight: 600; margin-bottom: 24px; letter-spacing: 0.04em; opacity: 0; animation: fade-up 0.5s ease forwards 1.1s; }
+  .badge::before { content: '●'; font-size: 0.5rem; }
+
+  h1 { font-family: var(--font-head); font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.01em; margin-bottom: 16px; color: var(--text); opacity: 0; animation: fade-up 0.5s ease forwards 1.2s; }
+  h1 em { font-style: normal; background: linear-gradient(90deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+  .subtitle { font-size: 1.05rem; color: var(--muted); max-width: 480px; margin: 0 auto 48px; font-weight: 300; line-height: 1.7; opacity: 0; animation: fade-up 0.5s ease forwards 1.3s; }
+
+  /* Steps */
+  .steps { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 36px; text-align: left; opacity: 0; animation: fade-up 0.5s ease forwards 1.4s; transition: background 0.35s, border-color 0.35s; }
+  .steps-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+  .step { display: flex; align-items: flex-start; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--border); }
+  .step:last-child { border-bottom: none; padding-bottom: 0; }
+  .step-num { width: 32px; height: 32px; border-radius: 50%; background: rgba(0,201,138,0.1); border: 1px solid rgba(0,201,138,0.25); display: flex; align-items: center; justify-content: center; font-family: var(--font-head); font-size: 0.85rem; font-weight: 800; color: var(--accent); flex-shrink: 0; }
+  .step-body { flex: 1; }
+  .step-title { font-family: var(--font-head); font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+  .step-desc { font-size: 0.85rem; color: var(--muted); font-weight: 300; line-height: 1.6; }
+  .step-time { font-size: 0.78rem; color: var(--accent); font-weight: 600; margin-top: 4px; }
+
+  /* CTA */
+  .cta-wrap { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; opacity: 0; animation: fade-up 0.5s ease forwards 1.5s; }
+  .btn-primary { background: var(--accent); color: #fff; border: none; padding: 14px 28px; border-radius: 8px; font-family: var(--font-body); font-size: 0.95rem; font-weight: 600; cursor: pointer; text-decoration: none; transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s; box-shadow: 0 0 30px rgba(0,201,138,0.2); display: inline-block; }
+  .btn-primary:hover { opacity: 0.88; transform: translateY(-2px); }
+  .btn-secondary { background: transparent; color: var(--text); border: 1px solid var(--border); padding: 14px 28px; border-radius: 8px; font-family: var(--font-body); font-size: 0.95rem; font-weight: 500; cursor: pointer; text-decoration: none; transition: border-color 0.2s, background 0.2s; display: inline-block; }
+  .btn-secondary:hover { border-color: rgba(0,201,138,0.4); background: rgba(0,201,138,0.04); }
+
+  /* Confetti dots */
+  .confetti { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .dot { position: absolute; border-radius: 50%; opacity: 0; animation: float-dot 3s ease forwards; }
+
+  @keyframes fade-up { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes float-dot { 0% { opacity: 0; transform: translateY(0) scale(0); } 20% { opacity: 0.7; } 100% { opacity: 0; transform: translateY(-120px) scale(1); } }
+
+  /* FOOTER */
+  footer { padding: 28px 6vw; border-top: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; gap: 10px; transition: border-color 0.35s; }
+  footer p { font-size: 0.82rem; color: var(--muted); }
+  .footer-links { display: flex; gap: 20px; }
+  .footer-links a { font-size: 0.82rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--text); }
+
+  @media (max-width: 480px) {
+    .cta-wrap { flex-direction: column; }
+    .btn-primary, .btn-secondary { text-align: center; }
+    .steps { padding: 22px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Glows -->
+<div class="glow-1"></div>
+<div class="glow-2"></div>
+
+<!-- Confetti -->
+<div class="confetti" id="confetti"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="index.html">Quant<span>Next</span></a>
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle tema">🌙</button>
+</nav>
+
+<main>
+  <div class="content">
+
+    <!-- Animated check -->
+    <div class="success-ring">
+      <div class="icon-bg"></div>
+      <svg viewBox="0 0 100 100">
+        <circle class="ring-bg" cx="50" cy="50" r="45"/>
+        <circle class="ring-fill" cx="50" cy="50" r="45" transform="rotate(-90 50 50)"/>
+        <polyline class="check" points="30,50 44,64 70,36"/>
+      </svg>
+    </div>
+
+    <div class="badge">Pago confirmado</div>
+
+    <h1>¡Todo listo!<br>Pago realizado <em>con éxito</em></h1>
+    <p class="subtitle">Hemos recibido tu pago correctamente. En breve recibirás un email de confirmación con tu justificante. Nuestro equipo se pondrá en contacto contigo muy pronto.</p>
+
+    <!-- Qué pasa ahora -->
+    <div class="steps">
+      <div class="steps-label">¿Qué pasa ahora?</div>
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-title">Confirmación por email</div>
+          <div class="step-desc">Recibirás un email con el justificante de pago y los detalles de tu pedido.</div>
+          <div class="step-time">Inmediato</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-title">Nos ponemos en contacto</div>
+          <div class="step-desc">Uno de nuestros especialistas te contactará para organizar las sesiones de trabajo.</div>
+          <div class="step-time">En menos de 24 horas</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-title">Arrancamos el proyecto</div>
+          <div class="step-desc">Comenzamos el diagnóstico de tus procesos y la identificación de oportunidades de automatización.</div>
+          <div class="step-time">En los próximos días</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTAs -->
+    <div class="cta-wrap">
+      <a href="index.html" class="btn-primary">Volver al inicio →</a>
+      <a href="https://wa.me/34647025041?text=Acabo%20de%20realizar%20el%20pago%20en%20QuantNext" class="btn-secondary" target="_blank" rel="noopener">¿Dudas? WhatsApp</a>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>© 2026 QuantNext. Todos los derechos reservados.</p>
+  <div class="footer-links">
+    <a href="privacidad.html">Privacidad</a>
+    <a href="terminos.html">Términos</a>
+  </div>
+</footer>
+
+<script>
+  // ── Token verification ──
+  // Only allow access if URL contains a valid Stripe Payment Link ID
+  (function() {
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get('token');
+    const isValid = token && (
+      token.startsWith('plink_') ||  // Payment Link ID
+      token.startsWith('cs_')        // Checkout Session ID (fallback)
+    );
+    if (!isValid) {
+      document.body.style.opacity = '0';
+      window.location.replace('index.html');
+    }
+  })();
+</script>
+
+<script>
+  // Theme
+  const themeBtn = document.getElementById('themeToggle');
+  if (localStorage.getItem('qn-theme') === 'light') { document.body.classList.add('light'); themeBtn.textContent = '☀️'; }
+  themeBtn.addEventListener('click', () => {
+    document.body.classList.toggle('light');
+    const isLight = document.body.classList.contains('light');
+    themeBtn.textContent = isLight ? '☀️' : '🌙';
+    localStorage.setItem('qn-theme', isLight ? 'light' : 'dark');
+  });
+
+  // Confetti dots
+  const colors = ['#00c98a','#00e5a0','#0077ff','#58a6ff','#ffffff'];
+  const confetti = document.getElementById('confetti');
+  function spawnDot() {
+    const dot = document.createElement('div');
+    dot.className = 'dot';
+    const size = Math.random() * 8 + 4;
+    dot.style.cssText = `
+      width:${size}px; height:${size}px;
+      left:${Math.random() * 100}%;
+      top:${60 + Math.random() * 40}%;
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      animation-delay:${Math.random() * 0.5}s;
+      animation-duration:${2 + Math.random()}s;
+    `;
+    confetti.appendChild(dot);
+    setTimeout(() => dot.remove(), 3500);
+  }
+  setTimeout(() => {
+    for (let i = 0; i < 18; i++) setTimeout(spawnDot, i * 80);
+  }, 900);
+</script>
+
+</body>
+</html>

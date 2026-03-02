@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Términos y Condiciones — QuantNext</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #080b10; --bg2: #0d1117; --card: #111720;
+    --border: rgba(255,255,255,0.07); --accent: #00c98a; --accent2: #0077ff;
+    --text: #e8edf5; --muted: #6b7a91;
+    --nav-bg: rgba(8,11,16,0.8);
+    --font-head: 'Syne', sans-serif; --font-body: 'DM Sans', sans-serif;
+  }
+  body.light {
+    --bg: #f4f6fa; --bg2: #eaecf3; --card: #ffffff;
+    --border: rgba(0,0,0,0.09); --text: #0d1117; --muted: #5a6a82;
+    --nav-bg: rgba(244,246,250,0.88);
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 17px; line-height: 1.65; overflow-x: hidden; max-width: 100vw; transition: background 0.35s, color 0.35s; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E"); opacity: 0.02; pointer-events: none; z-index: 9999; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 18px 6vw; background: var(--nav-bg); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); transition: background 0.35s, border-color 0.35s; }
+  .logo { font-family: var(--font-head); font-weight: 800; font-size: 1.3rem; color: var(--text); text-decoration: none; }
+  .logo span { color: var(--accent); }
+  .nav-right { display: flex; align-items: center; gap: 12px; }
+  .theme-toggle { width: 40px; height: 40px; border-radius: 8px; border: 1px solid var(--border); background: transparent; color: var(--muted); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.05rem; transition: border-color 0.2s, background 0.2s; }
+  .theme-toggle:hover { border-color: var(--accent); color: var(--accent); background: rgba(0,201,138,0.07); }
+  .nav-back { color: var(--muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+  .nav-back:hover { color: var(--accent); }
+
+  .page-wrap { max-width: 780px; margin: 0 auto; padding: 140px 6vw 100px; }
+  .section-label { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+  h1 { font-family: var(--font-head); font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.01em; margin-bottom: 12px; color: var(--text); }
+  .meta { font-size: 0.85rem; color: var(--muted); margin-bottom: 56px; }
+  .meta span { color: var(--accent); }
+
+  .doc-section { margin-bottom: 48px; }
+  .doc-section h2 { font-family: var(--font-head); font-size: 1.25rem; font-weight: 700; color: var(--text); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+  .doc-section p { color: var(--muted); font-size: 0.97rem; line-height: 1.8; margin-bottom: 14px; font-weight: 300; }
+  .doc-section p:last-child { margin-bottom: 0; }
+  .doc-section ul { list-style: none; display: flex; flex-direction: column; gap: 10px; margin: 14px 0; }
+  .doc-section ul li { display: flex; align-items: flex-start; gap: 10px; color: var(--muted); font-size: 0.97rem; font-weight: 300; line-height: 1.7; }
+  .doc-section ul li::before { content: '→'; color: var(--accent); font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+  .doc-section a { color: var(--accent); text-decoration: none; }
+  .doc-section a:hover { text-decoration: underline; }
+  .doc-section strong { color: var(--text); font-weight: 500; }
+  .highlight-box { background: linear-gradient(135deg, rgba(0,201,138,0.06), rgba(0,119,255,0.06)); border: 1px solid rgba(0,201,138,0.15); border-radius: 12px; padding: 20px 24px; margin: 20px 0; font-size: 0.95rem; color: var(--text); line-height: 1.7; }
+
+  footer { padding: 40px 6vw; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+  footer p { font-size: 0.85rem; color: var(--muted); }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a { font-size: 0.85rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--text); }
+
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.08s; }
+  .reveal-delay-2 { transition-delay: 0.16s; }
+
+  @media (max-width: 600px) {
+    .page-wrap { padding: 120px 5vw 80px; }
+    footer { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="main-nav">
+  <a class="logo" href="index.html">Quant<span>Next</span></a>
+  <div class="nav-right">
+    <a class="nav-back" href="index.html">← Volver</a>
+  </div>
+</nav>
+
+<div class="page-wrap">
+  <div class="section-label reveal">Legal</div>
+  <h1 class="reveal">Términos y Condiciones</h1>
+  <p class="meta reveal">Última actualización: <span>febrero 2026</span></p>
+
+  <div class="doc-section reveal">
+    <h2>1. Identificación del prestador</h2>
+    <p>El presente sitio web es titularidad de:</p>
+    <div class="highlight-box">
+      <strong>Quant Next Soluciones de Inteligencia Artificial y Márketing Digital SLU</strong><br>
+      Domicilio social: Canarias, España<br>
+      Email: <a href="mailto:hola@quantnext.es">hola@quantnext.es</a>
+    </div>
+    <p>El acceso y uso de este sitio web implica la aceptación plena de los presentes términos y condiciones.</p>
+  </div>
+
+  <div class="doc-section reveal reveal-delay-1">
+    <h2>2. Objeto y servicios</h2>
+    <p>QuantNext es una agencia especializada en automatización de procesos empresariales mediante Inteligencia Artificial. Los servicios que prestamos incluyen, con carácter enunciativo y no limitativo:</p>
+    <ul>
+      <li>Diagnóstico y auditoría de procesos (BPMN)</li>
+      <li>Diseño e implementación de flujos de automatización con IA</li>
+      <li>Integración de herramientas y plataformas empresariales</li>
+      <li>Desarrollo de chatbots y agentes inteligentes</li>
+      <li>Mantenimiento, soporte y optimización continua de sistemas</li>
+    </ul>
+    <p>Las condiciones específicas de cada proyecto (alcance, plazos, precio y entregables) se detallan en la propuesta o contrato de servicios acordado con cada cliente.</p>
+  </div>
+
+  <div class="doc-section reveal">
+    <h2>3. Proceso de contratación</h2>
+    <p>La relación comercial con QuantNext sigue las siguientes fases:</p>
+    <ul>
+      <li><strong>Consulta inicial gratuita:</strong> reunión de toma de contacto sin coste ni compromiso.</li>
+      <li><strong>Diagnóstico (1.000 €):</strong> auditoría completa de procesos con entrega de roadmap. El pago del diagnóstico no implica obligación de contratar la implementación.</li>
+      <li><strong>Implementación (desde 2.500 €):</strong> desarrollo de los sistemas definidos en el diagnóstico. El precio final se fija según el alcance acordado.</li>
+      <li><strong>Mantenimiento y soporte (desde 200 €/mes):</strong> servicio opcional de soporte continuo. Se formaliza mediante contrato de prestación de servicios mensual.</li>
+    </ul>
+    <p>Ningún servicio se considerará contratado hasta la firma del presupuesto o propuesta correspondiente y la recepción del pago o señal acordada.</p>
+  </div>
+
+  <div class="doc-section reveal reveal-delay-1">
+    <h2>4. Precios e IGIC</h2>
+    <p>Quant Next Soluciones de Inteligencia Artificial y Márketing Digital SLU opera en las Islas Canarias y está sujeta al Impuesto General Indirecto Canario (IGIC) en lugar del IVA peninsular. Los precios publicados en la web son orientativos y se expresan sin impuestos. El tipo de IGIC aplicable se indicará en cada presupuesto según la naturaleza del servicio y la ubicación del cliente.</p>
+  </div>
+
+  <div class="doc-section reveal">
+    <h2>5. Propiedad intelectual</h2>
+    <p>Todos los contenidos de este sitio web (textos, diseños, imágenes, código, logotipos) son propiedad de QuantNext o de sus licenciantes, y están protegidos por la legislación española e internacional sobre propiedad intelectual e industrial.</p>
+    <p>Queda expresamente prohibida la reproducción, distribución, comunicación pública o transformación de cualquier contenido sin autorización previa y escrita de QuantNext.</p>
+    <p>Respecto a los entregables de cada proyecto, la titularidad de los derechos se especificará en el contrato de servicios correspondiente.</p>
+  </div>
+
+  <div class="doc-section reveal reveal-delay-1">
+    <h2>6. Confidencialidad</h2>
+    <p>QuantNext se compromete a tratar con estricta confidencialidad toda la información que el cliente comparta en el marco de la relación comercial: datos de negocio, procesos internos, credenciales de acceso a herramientas y cualquier otra información sensible.</p>
+    <p>Esta obligación de confidencialidad se mantendrá vigente durante la duración del proyecto y durante un período de dos (2) años desde su finalización, salvo acuerdo expreso distinto en el contrato de servicios.</p>
+  </div>
+
+  <div class="doc-section reveal">
+    <h2>7. Limitación de responsabilidad</h2>
+    <p>QuantNext pone todos los medios razonables a su disposición para garantizar la calidad y correcto funcionamiento de los sistemas entregados. Sin embargo, no podemos garantizar la disponibilidad ininterrumpida de plataformas de terceros (APIs, herramientas SaaS, etc.) sobre las que no tenemos control.</p>
+    <p>En ningún caso QuantNext será responsable de daños indirectos, lucro cesante o pérdida de datos derivados de fallos en servicios de terceros integrados en los sistemas desarrollados.</p>
+  </div>
+
+  <div class="doc-section reveal reveal-delay-1">
+    <h2>8. Legislación aplicable y jurisdicción</h2>
+    <p>Los presentes términos se rigen por la legislación española. Para la resolución de cualquier controversia derivada del acceso o uso de este sitio web, las partes se someten a los Juzgados y Tribunales competentes en las Islas Canarias, con renuncia expresa a cualquier otro fuero que pudiera corresponderles.</p>
+  </div>
+
+  <div class="doc-section reveal">
+    <h2>9. Modificaciones</h2>
+    <p>QuantNext se reserva el derecho a modificar estos términos en cualquier momento. Los cambios serán efectivos desde su publicación en este sitio web. El uso continuado del sitio tras la publicación de cambios implica la aceptación de los nuevos términos.</p>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 QuantNext. Todos los derechos reservados.</p>
+  <div class="footer-links">
+    <a href="privacidad.html">Privacidad</a>
+    <a href="terminos.html">Términos</a>
+    <a href="index.html#cta-final">Contacto</a>
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  const navEl = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    const isLight = document.body.classList.contains('light');
+    navEl.style.background = window.scrollY > 50
+      ? (isLight ? 'rgba(244,246,250,0.97)' : 'rgba(8,11,16,0.97)')
+      : 'var(--nav-bg)';
+  });
+</script>
+</body>
+</html>

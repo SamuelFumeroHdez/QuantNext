@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Política de Privacidad — QuantNext</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #080b10; --bg2: #0d1117; --card: #111720;
+    --border: rgba(255,255,255,0.07); --accent: #00c98a; --accent2: #0077ff;
+    --text: #e8edf5; --muted: #6b7a91;
+    --nav-bg: rgba(8,11,16,0.8);
+    --font-head: 'Syne', sans-serif; --font-body: 'DM Sans', sans-serif;
+  }
+  body.light {
+    --bg: #f4f6fa; --bg2: #eaecf3; --card: #ffffff;
+    --border: rgba(0,0,0,0.09); --text: #0d1117; --muted: #5a6a82;
+    --nav-bg: rgba(244,246,250,0.88);
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 17px; line-height: 1.65; overflow-x: hidden; max-width: 100vw; transition: background 0.35s, color 0.35s; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E"); opacity: 0.02; pointer-events: none; z-index: 9999; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 18px 6vw; background: var(--nav-bg); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); transition: background 0.35s, border-color 0.35s; }
+  .logo { font-family: var(--font-head); font-weight: 800; font-size: 1.3rem; color: var(--text); text-decoration: none; }
+  .logo span { color: var(--accent); }
+  .nav-right { display: flex; align-items: center; gap: 12px; }
+  .theme-toggle { width: 40px; height: 40px; border-radius: 8px; border: 1px solid var(--border); background: transparent; color: var(--muted); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.05rem; transition: border-color 0.2s, background 0.2s; }
+  .theme-toggle:hover { border-color: var(--accent); color: var(--accent); background: rgba(0,201,138,0.07); }
+  .nav-back { color: var(--muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+  .nav-back:hover { color: var(--accent); }
+
+  /* CONTENT */
+  .page-wrap { max-width: 780px; margin: 0 auto; padding: 140px 6vw 100px; }
+  .section-label { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+  h1 { font-family: var(--font-head); font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.01em; margin-bottom: 12px; color: var(--text); }
+  .meta { font-size: 0.85rem; color: var(--muted); margin-bottom: 56px; }
+  .meta span { color: var(--accent); }
+
+  .doc-section { margin-bottom: 48px; }
+  .doc-section h2 { font-family: var(--font-head); font-size: 1.25rem; font-weight: 700; color: var(--text); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+  .doc-section p { color: var(--muted); font-size: 0.97rem; line-height: 1.8; margin-bottom: 14px; font-weight: 300; }
+  .doc-section p:last-child { margin-bottom: 0; }
+  .doc-section ul { list-style: none; display: flex; flex-direction: column; gap: 10px; margin: 14px 0; }
+  .doc-section ul li { display: flex; align-items: flex-start; gap: 10px; color: var(--muted); font-size: 0.97rem; font-weight: 300; line-height: 1.7; }
+  .doc-section ul li::before { content: '→'; color: var(--accent); font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+  .doc-section a { color: var(--accent); text-decoration: none; }
+  .doc-section a:hover { text-decoration: underline; }
+  .highlight-box { background: linear-gradient(135deg, rgba(0,201,138,0.06), rgba(0,119,255,0.06)); border: 1px solid rgba(0,201,138,0.15); border-radius: 12px; padding: 20px 24px; margin: 20px 0; font-size: 0.95rem; color: var(--text); line-height: 1.7; }
+
+  /* FOOTER */
+  footer { padding: 40px 6vw; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+  footer p { font-size: 0.85rem; color: var(--muted); }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a { font-size: 0.85rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--text); }
+
+  /* REVEAL */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.08s; }
+  .reveal-delay-2 { transition-delay: 0.16s; }
+
+  @media (max-width: 600px) {
+    .page-wrap { padding: 120px 5vw 80px; }
+    footer { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="main-nav">
+  <a class="logo" href="index.html">Quant<span>Next</span></a>
+  <div class="nav-right">
+    <a class="nav-back" href="index.html">← Volver</a>
+  </div>
+</nav>
+
+<div class="page-wrap">
+  <div class="section-label reveal">Legal</div>
+  <h1 class="reveal">Política de Privacidad</h1>
+  <p class="meta reveal">Última actualización: <span>febrero 2026</span></p>
+
+  <div class="doc-section reveal">
+    <h2>1. Responsable del tratamiento</h2>
+    <p>En cumplimiento del Reglamento (UE) 2016/679 General de Protección de Datos (RGPD) y la Ley Orgánica 3/2018 de Protección de Datos Personales y garantía de los derechos digitales (LOPDGDD), le informamos que el responsable del tratamiento de sus datos personales es:</p>
+    <div class="highlight-box">
+      <strong>Quant Next Soluciones de Inteligencia Artificial y Márketing Digital SLU</strong><br>
+      Domicilio social: Canarias, España<br>
+      Email de contacto: <a href="mailto:privacidad@quantnext.es">privacidad@quantnext.es</a>
+    </div>
+  </div>
+
+  <div class="doc-section reveal reveal-delay-1">
+    <h2>2. Datos que recopilamos</h2>
+    <p>A través del formulario de contacto de nuestra web, recopilamos los siguientes datos personales:</p>
+    <ul>
+      <li>Nombre y apellidos</li>
+      <li>Nombre de empresa (opcional)</li>
+      <li>Dirección de correo electrónico</li>
+      <li>Número de teléfono</li>
+      <li>El contenido del mensaje que nos envías</li>
+    </ul>
+    <p>No recopilamos datos especialmente sensibles ni datos de menores de 14 años. Si eres menor de 14 años, por favor no utilices este formulario.</p>
+  </div>
+
+  <div class="doc-section reveal">
+    <h2>3. Finalidad y base legal del tratamiento</h2>
+    <p>Tratamos tus datos con las siguientes finalidades y bases legales:</p>
+    <ul>
+      <li><strong>Atender tu consulta:</strong> base legal, consentimiento del interesado (art. 6.1.a RGPD).</li>
+      <li><strong>Gestión comercial y envío de información sobre nuestros servicios:</strong> base legal, interés legítimo (art. 6.1.f RGPD) y/o consentimiento.</li>
+      <li><strong>Cumplimiento de obligaciones legales:</strong> base legal, obligación legal (art. 6.1.c RGPD).</li>
+    </ul>
+  </div>
+
+  <div class="doc-section reveal reveal-delay-1">
+    <h2>4. Conservación de los datos</h2>
+    <p>Conservaremos tus datos personales durante el tiempo necesario para gestionar tu solicitud y, posteriormente, durante los plazos legalmente establecidos para atender posibles responsabilidades. Una vez transcurridos dichos plazos, los datos serán suprimidos de forma segura.</p>
+  </div>
+
+  <div class="doc-section reveal">
+    <h2>5. Destinatarios</h2>
+    <p>No cedemos tus datos a terceros salvo obligación legal. Para el envío y gestión de los formularios utilizamos herramientas de automatización propias (n8n) alojadas en servidores seguros. Podemos hacer uso de proveedores de servicios de correo electrónico como subencargados del tratamiento, con los que mantenemos los correspondientes acuerdos de tratamiento de datos.</p>
+  </div>
+
+  <div class="doc-section reveal reveal-delay-1">
+    <h2>6. Transferencias internacionales</h2>
+    <p>No realizamos transferencias internacionales de datos a países fuera del Espacio Económico Europeo. En caso de que alguna herramienta técnica implique dicha transferencia, nos aseguramos de que existan las garantías adecuadas conforme al RGPD (cláusulas contractuales tipo, decisión de adecuación, etc.).</p>
+  </div>
+
+  <div class="doc-section reveal">
+    <h2>7. Tus derechos</h2>
+    <p>Como titular de los datos, puedes ejercer en cualquier momento los siguientes derechos:</p>
+    <ul>
+      <li><strong>Acceso:</strong> conocer qué datos tuyos tratamos.</li>
+      <li><strong>Rectificación:</strong> corregir datos inexactos o incompletos.</li>
+      <li><strong>Supresión:</strong> solicitar la eliminación de tus datos.</li>
+      <li><strong>Oposición:</strong> oponerte al tratamiento de tus datos.</li>
+      <li><strong>Limitación:</strong> solicitar la restricción del tratamiento.</li>
+      <li><strong>Portabilidad:</strong> recibir tus datos en formato estructurado.</li>
+    </ul>
+    <p>Para ejercer cualquiera de estos derechos, escríbenos a <a href="mailto:privacidad@quantnext.es">privacidad@quantnext.es</a>. También tienes derecho a presentar una reclamación ante la <a href="https://www.aepd.es" target="_blank" rel="noopener">Agencia Española de Protección de Datos (AEPD)</a>.</p>
+  </div>
+
+  <div class="doc-section reveal reveal-delay-1">
+    <h2>8. Cookies</h2>
+    <p>Esta web no utiliza cookies propias de seguimiento ni de terceros. Únicamente se pueden generar cookies técnicas estrictamente necesarias para el funcionamiento del sitio. No realizamos perfilado ni análisis de comportamiento del usuario.</p>
+  </div>
+
+  <div class="doc-section reveal">
+    <h2>9. Régimen fiscal especial de Canarias</h2>
+    <p>Quant Next Soluciones de Inteligencia Artificial y Márketing Digital SLU opera bajo el régimen fiscal especial de las Islas Canarias (régimen IGIC). Esto no afecta al tratamiento de tus datos personales, que se rige íntegramente por el RGPD y la normativa española aplicable.</p>
+  </div>
+
+  <div class="doc-section reveal reveal-delay-1">
+    <h2>10. Modificaciones</h2>
+    <p>Nos reservamos el derecho a actualizar esta política de privacidad para adaptarla a novedades legislativas o cambios en nuestros servicios. Te recomendamos revisarla periódicamente. La fecha de última actualización aparece al inicio de este documento.</p>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 QuantNext. Todos los derechos reservados.</p>
+  <div class="footer-links">
+    <a href="privacidad.html">Privacidad</a>
+    <a href="terminos.html">Términos</a>
+    <a href="index.html#cta-final">Contacto</a>
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  const navEl = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    const isLight = document.body.classList.contains('light');
+    navEl.style.background = window.scrollY > 50
+      ? (isLight ? 'rgba(244,246,250,0.97)' : 'rgba(8,11,16,0.97)')
+      : 'var(--nav-bg)';
+  });
+
+</script>
+</body>
+</html>
